@@ -4,6 +4,7 @@ node_modules/
 # Context and documentation files
 project-context.md
 project_structure.txt
+RENDER_DEPLOYMENT.md
 
 # Logs
 *.log
@@ -44,3 +45,6 @@ jspm_packages/
 
 # Vercel
 .vercel
+
+# Render
+.render

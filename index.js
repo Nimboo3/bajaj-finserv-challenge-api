@@ -10,7 +10,7 @@ app.use(express.static("public"));
 
 const corsOptions = {
   origin: [
-    "https://bajaj-finserv-challenge-api-production.up.railway.app",
+    "https://bajaj-finserv-challenge-api.onrender.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000"
   ],

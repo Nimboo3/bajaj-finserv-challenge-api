@@ -1,0 +1,16 @@
+# Render Build & Deploy Configuration
+
+# Build Command (if needed)
+# npm install
+
+# Start Command
+# npm start
+
+# Environment
+# Node.js
+
+# Health Check
+# GET /
+
+# Auto-Deploy
+# Enabled on main branch
