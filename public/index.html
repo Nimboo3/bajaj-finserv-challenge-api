@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BFHL API Tester</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      font-family: monospace;
+    }
+    button {
+      padding: 10px 15px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      white-space: pre-wrap;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>BFHL API Tester</h1>
+  <p>Enter JSON payload and send it to <code>/bfhl</code>.</p>
+
+  <label for="payload">Request Payload (JSON)</label>
+  <textarea id="payload" rows="6">{
+  "data": ["a","1","334","4","R","$"]
+}</textarea>
+
+  <button onclick="sendRequest()">Send Request</button>
+
+  <h2>Response</h2>
+  <pre id="response"></pre>
+
+  <script>
+    async function sendRequest() {
+      const payloadText = document.getElementById('payload').value;
+
+      let payload;
+      try {
+        payload = JSON.parse(payloadText);
+      } catch (e) {
+        document.getElementById('response').textContent = "Invalid JSON format.";
+        return;
+      }
+
+      try {
+        const res = await fetch("/bfhl", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('response').textContent = "Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
