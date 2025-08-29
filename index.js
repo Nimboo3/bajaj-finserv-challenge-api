@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
@@ -7,11 +8,17 @@ const app = express();
 app.use(express.json());
 app.use(express.static("public"));
 
+const corsOptions = {
+  origin: "https://bajaj-finserv-challenge-api-production.up.railway.app/",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+};
+app.use(cors(corsOptions));
 
 function buildUserId() {
   const fullName = (process.env.FULL_NAME || "john doe").trim().toLowerCase();
   const slug = fullName.replace(/\s+/g, "_").replace(/[^\w_]+/g, "");
-  const dob = (process.env.DOB || "17091999").trim(); //ddmmyyyy
+  const dob = (process.env.DOB || "17091999").trim(); // ddmmyyyy
   return `${slug}_${dob}`;
 }
 
@@ -60,7 +67,7 @@ app.post("/bfhl", (req, res) => {
     const allAlphabetChars = [];
 
     for (const raw of items) {
-      const token = raw === null || raw === undefined ? "" : String(raw);
+      const token = raw == null ? "" : String(raw);
 
       if (isIntegerString(token)) {
         const n = parseInt(token, 10);
@@ -77,7 +84,7 @@ app.post("/bfhl", (req, res) => {
 
       if (isAlphaString(token)) {
         alphabets.push(token.toUpperCase());
-        allAlphabetChars.push(...token.split(''));
+        allAlphabetChars.push(...token.split(""));
         continue;
       }
 
@@ -91,7 +98,7 @@ app.post("/bfhl", (req, res) => {
       .map((ch, idx) => (idx % 2 === 0 ? ch.toUpperCase() : ch.toLowerCase()))
       .join("");
 
-    const response = {
+    return res.status(200).json({
       is_success: true,
       user_id: userId,
       email,
@@ -102,14 +109,11 @@ app.post("/bfhl", (req, res) => {
       special_characters,
       sum: String(sum),
       concat_string,
-    };
-
-    return res.status(200).json(response);
+    });
   } catch (err) {
-    const userId = buildUserId();
     return res.status(200).json({
       is_success: false,
-      user_id: userId,
+      user_id: buildUserId(),
       email: DEFAULT_EMAIL,
       roll_number: DEFAULT_ROLL,
       odd_numbers: [],
@@ -125,7 +129,6 @@ app.post("/bfhl", (req, res) => {
 
 app.get("/", (_, res) => res.send("bfhl endpoint server up. POST /bfhl"));
 
-//Start
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
