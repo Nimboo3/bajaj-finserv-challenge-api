@@ -1,7 +1,5 @@
 # BFHL Backend + Frontend Project
 
-This is my submission for the BFHL assignment.  
-It’s a small Node.js + Express app with a static frontend where you can paste JSON input and see the processed output.
 
 ---
 
@@ -18,7 +16,7 @@ It’s a small Node.js + Express app with a static frontend where you can paste 
 ## ⚙️ Tech Stack
 - **Backend**: Node.js, Express
 - **Frontend**: Plain HTML/CSS/JS (served from `public/`)
-- **Deployment**: Works on Railway
+- **Deployment**: Railway
 
 ---
 

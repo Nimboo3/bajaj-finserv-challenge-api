@@ -9,9 +9,14 @@ app.use(express.json());
 app.use(express.static("public"));
 
 const corsOptions = {
-  origin: "https://bajaj-finserv-challenge-api-production.up.railway.app/",
+  origin: [
+    "https://bajaj-finserv-challenge-api-production.up.railway.app",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
+  ],
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
+  credentials: true
 };
 app.use(cors(corsOptions));
 
@@ -130,6 +135,9 @@ app.post("/bfhl", (req, res) => {
 app.get("/", (_, res) => res.send("bfhl endpoint server up. POST /bfhl"));
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+const HOST = process.env.HOST || '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server listening on ${HOST}:${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
