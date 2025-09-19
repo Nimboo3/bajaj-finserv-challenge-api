@@ -1,9 +1,9 @@
-# BFHL Backend + Frontend Project
+# bfhl api
 
 
 ---
 
-## 📌 Features
+##  Features
 - `/bfhl` POST endpoint that:
   - Separates odd/even numbers, alphabets, and special characters
   - Computes sum of all numbers
@@ -13,14 +13,7 @@
 
 ---
 
-## ⚙️ Tech Stack
-- **Backend**: Node.js, Express
-- **Frontend**: Plain HTML/CSS/JS (served from `public/`)
-- **Deployment**: Render
-
----
-
-## 🚀 Running Locally
+##  Running Locally
 
 1. Clone the repo:
    ```bash
@@ -46,53 +39,8 @@
 
 5. Visit `http://localhost:3000` to test the API
 
----
-
-## 🚀 Render Deployment
-
-### Prerequisites
-- Render account
-- GitHub repository
-
-### Deployment Steps
-
-1. **Connect to Render:**
-   - Go to [Render](https://render.com)
-   - Click "New +" → "Web Service"
-   - Connect your GitHub account
-   - Select this repository
-
-2. **Configure Service:**
-   ```
-   Name: bajaj-finserv-challenge-api
-   Environment: Node
-   Build Command: npm install
-   Start Command: npm start
-   ```
-
-3. **Set Environment Variables:**
-   In Render dashboard, add these environment variables:
-   ```
-   FULL_NAME=your_full_name_here
-   DOB=ddmmyyyy  
-   EMAIL=your_email@example.com
-   ROLL_NUMBER=your_roll_number_here
-   NODE_ENV=production
-   ```
-
-4. **Deploy:**
-   - Render will automatically build and deploy
-   - Your app will be available at: `https://bajaj-finserv-challenge-api.onrender.com`
-
-### Render Configuration
-- `render.yaml`: Optional configuration file
-- Automatic deploys from main branch
-- Health checks on `/` endpoint
-- Free tier available (with sleep after inactivity)
 
 ---
-
-## 📋 API Documentation
 
 ### POST /bfhl
 Processes an array and returns categorized data.
@@ -125,29 +73,4 @@ Returns a simple status message and serves the test frontend.
 
 ---
 
-## 🔧 Project Structure
-```
-bajaj-finserv-challenge-api/
-├── index.js              # Main server file
-├── package.json          # Dependencies and scripts
-├── Procfile              # Process definition (Railway)
-├── render.yaml           # Render configuration
-├── .env.example          # Environment template
-├── .gitignore           # Git ignore rules
-├── README.md            # This file
-└── public/
-    └── index.html       # Frontend test interface
-```
 
----
-
-## ✅ Production Checklist
-
-- [x] ES6 modules configured
-- [x] CORS properly configured for Render
-- [x] Environment variables handled
-- [x] Error handling implemented
-- [x] Render configuration ready
-- [x] Health check endpoint
-- [x] Static file serving
-- [x] Production-ready logging
