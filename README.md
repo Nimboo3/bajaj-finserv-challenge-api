@@ -18,7 +18,7 @@
 1. Clone the repo:
    ```bash
    git clone <repo-url>
-   cd bajaj-finserv-challenge-api
+   cd bfhl-api
    ```
 
 2. Install dependencies:
